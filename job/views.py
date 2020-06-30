@@ -6,7 +6,7 @@ from .form import Apply_Form
 # Create your views here.
 def job_list(request):
     job_list=Job.objects.all()
-    paginator = Paginator(job_list, 1) # Show 25 contacts per page.
+    paginator = Paginator(job_list, 2) # Show 25 contacts per page.
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     context={
@@ -21,7 +21,11 @@ def job_detail(request,slug):
     # if click apply do soemthing
 
     if request.method=='POST':
-        pass
+        form=Apply_Form(request.POST, request.FILES)
+        if form.is_valid():
+            myform=form.save(commit=False)
+            myform.job=job_detail
+            myform.save()
     
     else:
         form=Apply_Form()
