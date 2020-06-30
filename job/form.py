@@ -1,5 +1,5 @@
 from django import forms
-from .models import Apply
+from .models import Apply, Job
 
 '''
 class Apply_Form(forms.ModelForm):
@@ -16,4 +16,16 @@ class Apply_Form(forms.ModelForm):
 
         model = Apply
         fields = ('name','email','website','cv','cover_letter')
+
+
+
+class Add_job(forms.ModelForm):
+
+    class Meta:
+        """Meta definition for MODELNAMEform."""
+
+        model = Job
+        fields = '__all__'
+        exclude =['slug']
+
 
